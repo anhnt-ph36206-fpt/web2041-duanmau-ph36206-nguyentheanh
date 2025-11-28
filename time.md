@@ -1,1 +1,3 @@
 -   Buổi 1 - 4/11/2025 - Update github 27/11/2025
+-   Buổi 2 - 11/11/2025 - Update github 27-28/11/2025
+-   Buổi 3 - 18/11/2025 - Update github 28/11/2025

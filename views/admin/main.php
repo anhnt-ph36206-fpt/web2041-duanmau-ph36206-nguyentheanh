@@ -24,6 +24,9 @@
             <li class="nav-item">
                 <a class="nav-link text-uppercase" href="<?= BASE_URL ?>"><b>Home Client</b></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-uppercase" href="<?= BASE_URL . '?mode=admin&action=list-product' ?>"><b>DANH SÁCH SẢN PHẨM</b></a>
+            </li>
         </ul>
     </nav>
 

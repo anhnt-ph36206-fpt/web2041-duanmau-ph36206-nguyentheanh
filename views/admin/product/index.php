@@ -1,7 +1,7 @@
 <!-- Table -->
 <table class="table table-striped table-hover align-middle">
         <thead class="table-dark">
-            <tr>
+            <tr class="text-center">
                 <th>ID</th>
                 <th>Ảnh Sản Phẩm</th>
                 <th>Tên Sản Phẩm</th>
@@ -14,9 +14,11 @@
         </thead>
         <tbody>
             <?php foreach($products as $pro) :?>
-            <tr>
+            <tr class="text-center">
                 <td><?= $pro['id']?></td>
-                <td><img src="<?=BASE_ASSETS_UPLOADS . $pro['image'] ?>" alt="" width="100px"></td>
+                <td>
+                    <img src="<?=BASE_ASSETS_UPLOADS . $pro['image'] ?>" alt="" width="100px">
+                </td>
                 <td><?= $pro['name']?></td>
                 <td><?= $pro['category_name']?></td>
                 <td><?= $pro['description']?></td>

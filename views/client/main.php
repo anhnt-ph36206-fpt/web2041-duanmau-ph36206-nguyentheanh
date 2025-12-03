@@ -16,7 +16,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-xxl bg-light justify-content-center">
+    <!-- <nav class="navbar navbar-expand-xxl bg-light justify-content-center">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-uppercase" href="<?= BASE_URL ?>"><b>Home Client</b></a>
@@ -25,16 +25,17 @@
                 <a class="nav-link text-uppercase" href="<?= BASE_URL . '?mode=admin'?>"><b>Home Admin</b></a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 
     <div class="container">
-        <h1 class="mt-3 mb-3"><?= $title ?? 'Home Client' ?></h1>
+        <!-- <h1 class="mt-3 mb-3"><?= $title ?? 'Home Client' ?></h1> -->
 
         <div class="row">
             <?php
             if (isset($view)) {
                 require_once PATH_VIEW_CLIENT . $view . '.php';
             }
+            // require_once PATH_VIEW_CLIENT . $view . '.php';
             ?>
         </div>
     </div>

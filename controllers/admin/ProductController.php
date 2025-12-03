@@ -89,7 +89,8 @@ class ProductController extends BaseModel
                 $this->modelProduct->delete($id);
             }
         } catch (Exception $er) {
-            throw new Exception("Thao tác xoá lỗi");
+            echo '<pre>';
+            throw new Exception("Thao tác xoá lỗi do sản phẩm này có bình luận");
         }
         //  Dùng session flash message để hiển thị thông báo xoá thành công
         $_SESSION['success'] = 'Xoá sản phẩm thành công';

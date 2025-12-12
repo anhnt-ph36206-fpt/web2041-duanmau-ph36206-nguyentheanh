@@ -1,0 +1,207 @@
+Ngày nay, các hệ thống bán lẻ thiết bị điện tử, công nghệ như CellphoneS, MacStore hoạt động dựa trên mô hình thương mại điện tử, cung cấp khả năng quản lý sản phẩm – đơn hàng – người dùng – đánh giá/bình luận – danh mục sản phẩm,... 
+Việc quản lý dữ liệu thủ công và truyền thống gây ra không ít trở ngại, rủi do,tốn thời gian và dễ sai sót.
+Vì vậy dựa theo nhu cầu phát sinh avf vấn đề cần giải quyết, ta cần xây dựng một hệ thống website có giao diện quản trị (Admin) 
+hỗ trợ thao tác:
+
+- Quản lý sản phẩm
+- Quản lý danh mục sản phẩm
+- Quản lý bình luận của khách hàng
+- Quản lý tài khoản người dùng trong hệ thống
+
+- Hệ thống hướng tới mục tiêu tối ưu công cụ quản trị, giúp nhà quản lý website cập nhật sản phẩm nhanh chóng, 
+theo dõi phản hồi khách hàng và quản lý người dùng hiệu quả.
+
+I. NGHIỆP VỤ CHÍNH CỦA HỆ THỐNG
+1. Nghiệp vụ quản lý Danh Sách Sản Phẩm (Product Management)
+
+- Phía Admin có quyền thêm sản phẩm mới gồm:
+
+    +   Tên sản phẩm
+    +   Danh mục
+    +   Mô tả
+    +   Giá
+    +   Số lượng
+
+-   Ảnh minh hoạ cóp thể bỏ trốngb hoặc không
+
+-   Xoá sản phẩm có xác nhận (Confirm Alert)
+
+-   Không cho phép xoá sản phẩm nếu sản phẩm đang có bình luận để tránh mất dữ liệu liên kết (khoá ngoại)
+
+-   Form nhập sản phẩm yêu cầu bắt buộc nhập các trường trừ image ()
+
+-   Sau khi thêm và xoá sản phẩm hiển thị thông báo tự đóng sau 3 giây
+
+2. Nghiệp vụ quản lý Danh Mục Sản Phẩm (Category Management)
+
+-   Tạo danh mục mới gồm:
+    +   Tên danh mục
+    +   Mô tả
+    +   Xoá danh mục có xác nhận trước khi thao tác.
+    +   Tất cả trường trong form thêm danh mục đều required.
+    +   Sau khi thao tác thành công -> hiện box thông báo -> tự ẩn sau 33 giây
+
+3. Nghiệp vụ quản lý Bình luận (Comment Management)
+
+-   Tạo bình luận mới bằng cách:
+    +   Chọn người bình luận từ Danh Sách Người Dùng
+    +   Chọn sản phẩm từ Danh Sách Sản Phẩm
+    +   Nhập nội dung bình luận
+    +   Chọn trạng thái hiển thị (Hiện / Ẩn)
+    +   Không thể tạo bình luận nếu thiếu nội dung (required).
+    +   Xoá bình luận thì có nút xác nhận (Ok / Cancel) trước khi xóa.
+    +   Thêm và xoá bình luận thành công sẽ hiển thị box thông báo sau 3 giây
+
+4. Nghiệp vụ quản lý Người dùng (User Management)
+
+-   Thêm người dùng mới gồm:
+    +   Tên người dùng
+    +   Email
+    +   Mật khẩu
+    +   Quyền (Role)
+
+- Các trường bắt buộc phải nhập (required)
+
+- Không xoá người dùng nếu người dùng đang có bình luận liên kết với sản phẩm.
+
+- Thêm và xóa có confirm và hiển thị thông thông báo 
+
+III. MÔ TẢ QUY TRÌNH NGHIỆP VỤ HOẠT ĐỘNG CỦA HỆ THỐNG
+
+-   Chức năng	   -> Nghiệp vụ sử dụng	                    -> Điều kiện nghiệp vụ	Kết quả mong muốn
++   Thêm sản phẩm  -> Input + Validate dữ liệu + Lưu DB	    -> Bắt buộc nhập đầy đủ trừ ảnh	            -> Tạo mới, hiển thị thông báo thêm thành công và ẩn sau 3 giây
++   Xoá sản phẩm   -> Kiểm tra ràng buộc dữ liệu (Comment)	-> Nếu có bình luận thì chặn xoá(báo lỗi)   -> Xoá thành công -> Hiển thị thông báo và ẩn sau 3 giây
+
++   Thêm danh mục  -> Validate form	                        -> Required tất cả trường	                -> Lưu, Hiển thị thông báo và ẩn sau 3 giây
++   Xoá danh mục   -> Confirm hành động	                    -> Admin xác nhận OK	                    -> Xoá thành công -> Hiển thị thông báo và ẩn sau 3 giây
+
++   Thêm bình luận -> Liên kết bảng User – Product	        -> Nhập nội dung bắt buộc	                -> Lưu dữ liệu và thông báo, sau đó ẩn sau 3 giây
++   Xoá bình luận  -> Confirm + thao tác với DB             -> Chỉ khi admin chọn OK                    -> Xoá thành công -> Hiển thị thông báo và ẩn sau 3 giây
+
+
++   Thêm người dùng	-> Validate thông tin và Role(quyền )	-> Thiếu trường ->  không submit            -> Lưu người dùng mới và hiển thị thông báo và ẩn sau 3 giây
++   Xoá người dùng	-> Kiểm tra quan hệ với bình luận       -> Có bình luận thì cấm xoá	                -> Nếu không thì xoá thành công thì hiển thị thông báo và ẩn sau 3 giây
+
+-   Đủ các nghiệp vụ:
+    +   Quản lý sản phẩm dùng trong hệ thống
+    +   Quản lý danh mục sản phẩm dùng trong hệ thống
+    +   Quản lý bình luận của khách hàng dùng trong hệ thống
+    +   Quản lý tài khoản người dùng trong hệ thống
+
+-Hệ thống hướng tới mục tiêu tối ưu công cụ quản trị, giúp nhà quản lý cập nhật sản phẩm nhanh chóng, theo dõi phản hồi khách hàng và quản lý người dùng hiệu quả.
+
+📌 II. NGHIỆP VỤ CHÍNH CỦA HỆ THỐNG
+1. Nghiệp vụ quản lý Sản phẩm (Product Management)
+
+Admin có quyền thêm sản phẩm mới gồm:
+
+Tên sản phẩm
+
+Danh mục
+
+Mô tả
+
+Giá
+
+Số lượng
+
+Ảnh minh hoạ (ảnh có thể bỏ trống – allowed null)
+
+Xoá sản phẩm có xác nhận (Confirm Alert).
+
+Không cho phép xoá sản phẩm nếu sản phẩm đang có bình luận → tránh mất dữ liệu liên kết.
+
+Form nhập sản phẩm yêu cầu bắt buộc nhập các trường trừ image.
+
+Sau khi thêm/xoá sản phẩm hiển thị thông báo tự đóng sau 3 giây.
+
+2. Nghiệp vụ quản lý Danh mục sản phẩm (Category Management)
+
+Tạo danh mục mới gồm:
+
+Tên danh mục
+
+Mô tả
+
+Xoá danh mục có xác nhận trước khi thao tác.
+
+Tất cả trường trong form thêm danh mục đều required.
+
+Sau khi thao tác thành công → Hiện box thông báo → tự ẩn sau 3s.
+
+3. Nghiệp vụ quản lý Bình luận (Comment Management)
+
+Tạo bình luận mới bằng cách:
+
+Chọn người bình luận từ danh sách Users
+
+Chọn sản phẩm từ danh sách Products
+
+Nhập nội dung bình luận
+
+Chọn trạng thái hiển thị (Hiện / Ẩn)
+
+Không thể tạo bình luận nếu thiếu nội dung.
+
+Xoá bình luận có xác nhận trước khi xóa.
+
+Chưa phát triển nút chuyển đổi trạng thái hiển thị/ẩn sau khi tạo.
+
+Thêm/xoá bình luận thành công hiển thị toast 3s.
+
+4. Nghiệp vụ quản lý Người dùng (User Management)
+
+Thêm user mới gồm:
+
+Tên người dùng
+
+Email
+
+Mật khẩu
+
+Quyền (Role)
+
+Các trường bắt buộc phải nhập.
+
+Không xoá user nếu user đang có bình luận liên kết với sản phẩm.
+
+Xóa có confirm và popup thông báo success.
+
+📌 III. MÔ TẢ QUY TRÌNH NGHIỆP VỤ HOẠT ĐỘNG CỦA HỆ THỐNG
+Chức năng	Nghiệp vụ sử dụng	Điều kiện nghiệp vụ	Kết quả mong muốn
+Thêm sản phẩm	Input + Validate dữ liệu + Lưu DB	Bắt buộc nhập đầy đủ trừ ảnh	Tạo mới, show thông báo 3s
+Xoá sản phẩm	Kiểm tra ràng buộc dữ liệu (Comment)	Nếu có bình luận thì chặn xoá	Xoá thành công → Notify
+Thêm danh mục	Validate form	Required tất cả trường	Lưu, hiển thị thông báo
+Xoá danh mục	Confirm hành động	Admin xác nhận OK	Xoá & notify
+Thêm bình luận	Liên kết bảng User – Product	Nội dung bắt buộc	Lưu dữ liệu & toast thành công
+Xoá bình luận	Confirm + thao tác DB	Chỉ khi admin chọn OK	Xoá, thông báo 3s
+Thêm người dùng	Validate thông tin & Role	Thiếu trường → không submit	Lưu user mới
+Xoá user	Kiểm tra quan hệ với comment	Có bình luận → cấm xoá	Nếu không → Xoá thành công
+📌 IV. KẾT LUẬN
+
+Hệ thống quản trị website bán hàng mô phỏng thực tế như Cellphones / Macstore giúp nhà quản lý:
+
+🔹 Quản trị sản phẩm – danh mục – người dùng tập trung
+🔹 Đảm bảo tính toàn vẹn dữ liệu thông qua ràng buộc xoá
+🔹 Giao diện đơn giản, có thông báo rõ ràng sau mỗi thao tác
+🔹 Xử lý nghiệp vụ theo đúng luồng thực tế của ngành thương mại điện tử
+
+➡ Đây là bài toán mang tính thực tiễn, đầy đủ nghiệp vụ chuẩn để làm đồ án web, PHP – Laravel, MVC,...
+
+Nếu bạn muốn, mình có thể vẽ sơ đồ usecase, ERD, biểu đồ hoạt động, phân rã module theo nội dung trên 📌
+Chỉ cần nhắn: "Hãy vẽ sơ đồ hệ thống cho bài toán này".🔥Chỉ khi admin chọn OK	Xoá, thông báo 3s
+Thêm người dùng	Validate thông tin & Role	Thiếu trường → không submit	Lưu user mới
+Xoá user	Kiểm tra quan hệ với comment	Có bình luận → cấm xoá	Nếu không → Xoá thành công
+📌 IV. KẾT LUẬN
+
+Hệ thống quản trị website bán hàng mô phỏng thực tế như Cellphones / Macstore giúp nhà quản lý:
+
+🔹 Quản trị sản phẩm – danh mục – người dùng tập trung
+🔹 Đảm bảo tính toàn vẹn dữ liệu thông qua ràng buộc xoá
+🔹 Giao diện đơn giản, có thông báo rõ ràng sau mỗi thao tác
+🔹 Xử lý nghiệp vụ theo đúng luồng thực tế của ngành thương mại điện tử
+
+➡ Đây là bài toán mang tính thực tiễn, đầy đủ nghiệp vụ chuẩn để làm đồ án web, PHP – Laravel, MVC,...
+
+Nếu bạn muốn, mình có thể vẽ sơ đồ usecase, ERD, biểu đồ hoạt động, phân rã module theo nội dung trên 📌
+Chỉ cần nhắn: "Hãy vẽ sơ đồ hệ thống cho bài toán này".🔥

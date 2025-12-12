@@ -35,16 +35,16 @@
                     </a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href class="nav-link">MacBook</a>
+                            <a href="<?php BASE_URL?>" class="nav-link">MacBook</a>
                         </li>
                         <li class="nav-item">
-                            <a href class="nav-link">Imac</a>
+                            <a href="<?php BASE_URL?>"f class="nav-link">Imac</a>
                         </li>
                         <li class="nav-item">
-                            <a href class="nav-link">Mac Mini</a>
+                            <a hre="<?php BASE_URL?>"f class="nav-link">Mac Mini</a>
                         </li>
                         <li class="nav-item">
-                            <a href class="nav-link">Mac Studio</a>
+                            <a href="<?php BASE_URL?>" class="nav-link">Mac Studio</a>
                         </li>
                     </ul>
                 </div>
@@ -55,7 +55,7 @@
                         <a href class="nav-link">Xin chào Nguyễn Thế Anh</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="../giao-dien-moi/danh-sach-san-pham.html" class="nav-link">Danh sách sản phẩm</a>
+                        <a href="<?php BASE_URL?>" class="nav-link">Danh sách sản phẩm</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a href="" class="nav-link">Đăng xuất tài khoản</a>
